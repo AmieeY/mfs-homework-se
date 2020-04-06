@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <form action="">
+        username:<input id="username" type="text" pattern="^[A-Za-z].{5,17}" required oninput="cheeckuser()">
+        <span id="user"></span>
+        <div></div>
+        password:<input id="password" type="password" pattern=".{6,18}" required oninput="checkpwd()">
+        <span id="pass"></span>
+        <div></div>
+        pwd-rpt:<input id="pwdrpt" type="password" required oninput="checkrepwd()">
+        <span id="passre"></span>
+        <div></div>
+        <input type="submit">
+    </form>
+    <script>
+        var timer;
+        var userspan = document.getElementById("user");
+        var passspan = document.getElementById("pass");
+        var passre = document.getElementById("passre");
+        function cheeckuser() {
+            var usernameinput = document.getElementById("username");
+            if (usernameinput.validity.patternMismatch) {
+                userspan.innerText = "用户名应为字母开头，且为6到18位"
+            } else {
+                userspan.innerText = "";
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    var username = document.getElementById("username").value;
+                    $.ajax({
+                        url: "http://wo.com:3000/users",
+                        method: "post",
+                        data: {
+                            username: username
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            if (data) {
+                                userspan.innerText = "用户名已存在";
+                            } else {
+                                userspan.innerText = "";
+                            }
+                        }
+                    })
+                }, 100);
+            }
+        }
+        function checkpwd() {
+            var passwordinput = document.getElementById("password");
+            if (passwordinput.validity.patternMismatch) {
+                passspan.innerText = "密码应为6到18位";
+            } else {
+                passspan.innerText = "";
+            }
+        }
+        function checkrepwd() {
+            var password = document.getElementById("password").value;
+            var pwdrpt = document.getElementById("pwdrpt");
+            if (password == pwdrpt.value) {
+                passre.innerText = "";
+            } else {
+                passre.innerText = "两次输入的密码不一致";
+            }
+        }
+    </script>
+</body>
+
+</html>

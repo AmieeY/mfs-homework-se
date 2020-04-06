@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>EJS Welcome to <%= title %></p>
+  
+    <select name="province" id="province" onchange="provincechange()">
+      <option value="11">请选择省份</option>
+    </select>
+    <select name="city" id="city" onchange="citychange()">
+      <option value="01">请选择城市</option>
+    </select>
+    <select name="county" id="county">
+      <option value="01">请选择区县</option>
+    </select>
+      <script>
+        var provincecode = document.getElementById("province").value;
+        var citycode = document.getElementById("city").value;
+        getprovince();
+        provincechange()
+        function getprovince() {
+            $.ajax({
+                method: "POST",
+                url: "http://wo.com:3000/city",
+                data: {
+                    level: "province"
+                },
+                success: function(data) {
+                    var province = document.getElementById("province");
+                    province.options.length = 0;
+                    for (var j = 0; j < data.length; j++) {
+                        province.options.add(new Option(data[j].region.name, data[j].region.code))
+                    }
+                }
+            })
+        }
+        function provincechange() {
+            var provincecode = document.getElementById("province").value;
+            getdata("city", provincecode);
+            console.log(provincecode);
+            citychange();
+        }
+        function citychange() {
+            var citycode = document.getElementById("city").value;
+            var provincecode = document.getElementById("province").value;
+            console.log(citycode);
+            getdata("county", citycode, provincecode);
+        }
+        function getdata(level, code, provincecode) {
+            $.ajax({
+                method: "POST",
+                url: "http://wo.com:3000/city",
+                data: {
+                    level: level,
+                    province: provincecode,
+                    code: code
+                },
+                success: function(data) {
+                    if (level == "city") {
+                        var city = document.getElementById("city");
+                        city.options.length = 0;
+                        for (var j = 0; j < data.length; j++) {
+                            city.options.add(new Option(data[j].name, data[j].code))
+                        }
+                    } else if (level == "county") {
+                        var county = document.getElementById("county");
+                        county.options.length = 0;
+                        console.log(data);
+                        for (var j = 0; j < data.length; j++) {
+                            county.options.add(new Option(data[j].name, data[j].code))
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+
+
+  </body>
+</html>
