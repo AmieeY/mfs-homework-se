@@ -1,0 +1,9 @@
+<div id="latest-article">
+  <mat-toolbar>Latest Articles</mat-toolbar>
+  <mat-list role="list">
+    <div *ngFor="let item of latest">
+      <mat-list-item role="listitem" (click)='toArticle(item.id)'>{{item.title}}</mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
+</div>

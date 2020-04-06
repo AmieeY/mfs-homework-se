@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>注册</h1>
+<div mat-dialog-content>
+  <div><p>{{message}}</p></div>
+  <mat-form-field>
+    <input matInput [(ngModel)]="username" placeholder="username">
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput [(ngModel)]="password" placeholder="password" type='password'>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput [(ngModel)]="rptPwd" placeholder="repeat password" type='password'>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input matInput [(ngModel)]="email" placeholder="e-mail">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)='checkSignin()'>Log in</button>
+</div>
+  

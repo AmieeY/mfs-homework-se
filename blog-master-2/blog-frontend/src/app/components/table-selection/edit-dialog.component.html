@@ -1,0 +1,16 @@
+<div id="outer-container" style='min-width: 600px !important'>
+<h1 mat-dialog-title>Edit</h1>
+<div class="container" >
+  <mat-form-field class='col-md-8'>
+    <input matInput [(ngModel)]="editorData.title" placeholder="title">
+  </mat-form-field>
+  <mat-form-field class='col-md-4'>
+    <input matInput [(ngModel)]="editorData.target" placeholder="target">
+  </mat-form-field>
+  <app-editor [content]="editorData.content" (contentChange)='updateContent($event)'></app-editor>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial (click)='callChildren()'>Ok</button>
+</div>
+</div>

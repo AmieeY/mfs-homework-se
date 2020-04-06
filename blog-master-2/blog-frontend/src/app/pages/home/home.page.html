@@ -1,0 +1,22 @@
+<div class="main">
+  <div class="container">
+    <div class='col-md-8 list'>
+      <div class="item" *ngFor="let article of articles">
+        <app-article-item [data]='article'></app-article-item>
+      </div>
+
+      <ng-container *ngIf="this.currentOffset; else elseTemplate" id="loading">
+        loading more<br/><mat-progress-bar mode="indeterminate" infiniteScroll
+        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()"></mat-progress-bar>
+      </ng-container>
+      <ng-template #elseTemplate>
+        over
+      </ng-template>
+    </div>
+    <div class='col-md-4 col-xs-12'>
+      <app-latest-article></app-latest-article>
+      <app-archive></app-archive>
+      <app-target></app-target>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<nav class='nav'>
+  <div class="container">
+    <h1>mfs-blog</h1>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+  <mat-menu #menu="matMenu">
+    <ng-container *ngIf="isLogin; else elseTemplate">
+        <button mat-menu-item (click)='toAdmin()'>
+            <mat-icon>dialpad</mat-icon>
+            <span>Admin</span>
+          </button>
+          <button mat-menu-item (click)='toNewEditor()'>
+            <mat-icon>edit</mat-icon>
+            <span>Write blog</span>
+          </button>
+    
+          <button mat-menu-item (click)='toLogout()'>
+            <mat-icon>voicemail</mat-icon>
+            <span>Log out</span>
+          </button>
+          <button mat-menu-item (click)='toHome()'>
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+          </button>
+          <button mat-menu-item (click)='toAbout()'>
+            <mat-icon>notifications_off</mat-icon>
+            <span>About</span>
+          </button>
+    
+    </ng-container>
+    <ng-template #elseTemplate>
+        <button mat-menu-item (click)='toLogin()'>
+            <mat-icon>dialpad</mat-icon>
+            <span>Log in</span>
+          </button>
+          <button mat-menu-item (click)='toSignin()'>
+            <mat-icon>voicemail</mat-icon>
+            <span>Sign in</span>
+          </button>
+          <button mat-menu-item (click)='toHome()'>
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+          </button>
+          <button mat-menu-item (click)='toAbout()'>
+            <mat-icon>notifications_off</mat-icon>
+            <span>About</span>
+          </button>
+    
+    </ng-template>
+    
+    </mat-menu>
+</nav>

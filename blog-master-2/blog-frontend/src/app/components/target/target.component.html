@@ -1,0 +1,4 @@
+<div class='target'>
+  <mat-toolbar>target</mat-toolbar>
+  <mat-card *ngFor="let item of targets" (click)='toTargetResult(item.name)'>{{item.name}}</mat-card>
+</div>

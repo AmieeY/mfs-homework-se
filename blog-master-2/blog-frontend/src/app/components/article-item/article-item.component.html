@@ -1,0 +1,27 @@
+<mat-card class="article-item">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{data.title}}</mat-card-title>
+      <mat-card-subtitle>
+        <span class='target'>{{data.tags}}</span>
+        <span class='circle'></span>
+        <span class='date'>{{data.createdAt|date:'yyyy-M-d EEE'}}</span>
+        <span class='circle'></span>
+        <span class='click-times'>{{data.clickTimes}}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content [innerHTML]="data.content"></mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon class="example-tab-icon">star</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon class="example-tab-icon">share</mat-icon>
+      </button>
+      <button mat-button (click)='toArticle()' *ngIf="!showDetail">查看文章</button>
+    </mat-card-actions>
+  </mat-card>
+  

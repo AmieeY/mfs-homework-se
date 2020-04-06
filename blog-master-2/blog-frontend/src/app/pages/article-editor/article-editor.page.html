@@ -1,0 +1,40 @@
+<div class="main">
+  <div class="container">
+    <div class='col-md-8 list'>
+      <div>
+        <mat-form-field class='col-md-8' id='title'>
+          <input matInput [(ngModel)]="editorData.title" placeholder="title">
+        </mat-form-field><br/>
+        <mat-form-field class='col-md-4' id='target'>
+          <!---
+          <input matInput [(ngModel)]="editorData.target" placeholder="target">
+          -->
+          <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                       [removable]="removable" (removed)="remove(tag)">
+                {{tag.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New tag..."
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+
+        </mat-form-field>
+      <app-editor [content]="content" (contentChange)='updateContent($event)'></app-editor>
+    </div>
+
+    <button mat-raised-button (click)='callChildren()'>提交</button>
+    
+    </div>
+    <div class='col-md-4 col-xs-12'>
+      <app-latest-article></app-latest-article>
+      <app-archive></app-archive>
+      <app-target></app-target>
+    </div>
+  </div>
+</div>
+
+
